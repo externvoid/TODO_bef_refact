@@ -44,6 +44,11 @@
         state.todoList = props.todoList;
         state.hasDoneTodo = this.checkDoneTodo()
       },
+      onMounted() {
+        console.log(this.$('h1'))
+        console.log(this.state.isInput)
+      },
+      // event hander
       addTodo(e) {
         e.preventDefault()
         if (e.target.todo.value) {
@@ -75,10 +80,6 @@
           hasDoneTodo: this.checkDoneTodo()
         })
       },
-      checkDoneTodo(updatedTodoList) {
-        const todoList = updatedTodoList || this.state.todoList
-        return todoList.some(item => item.done === false)
-      },
       deleteTodo(todo) {
         if (window.confirm('本当に削除してもよろしいですか？')) {
           const updatedTodoList
@@ -97,9 +98,10 @@
           })
         }
       },     
-      onMounted() {
-        console.log(this.$('h1'))
-        console.log(this.state.isInput)
+      // helper function
+      checkDoneTodo(updatedTodoList) {
+        const todoList = updatedTodoList || this.state.todoList
+        return todoList.some(item => item.done === false)
       }
     }
   </script>
